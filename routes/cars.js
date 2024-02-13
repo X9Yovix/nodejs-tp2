@@ -8,10 +8,6 @@ cars = [
     { id: 3, name: "range" }
 ];
 
-router.get('/add', (req, res) => {
-    res.sendFile(path.join(`${__dirname}/../view/cars/add.html`));
-});
-
 router.post('/add', (req, res) => {
     var id = cars.length + 1;
     var name = req.body.name;
@@ -36,6 +32,18 @@ router.get('/:id', (req, res) => {
         res.status(404).send("not found");
 
     res.send(car);
+});
+
+router.put('/:id', (req, res) => {
+    var id = req.params.id;
+    var car = cars.find(car => car.id == id);
+
+    if (!car)
+        res.status(404).send("not found");
+
+    car.name = req.body.name;
+
+    res.redirect('/cars/');
 });
 
 module.exports = router;
