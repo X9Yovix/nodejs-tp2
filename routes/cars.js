@@ -29,8 +29,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/:id', (req, res) => {
-    var id = req.params.id;
-    var car = cars.find(car => car.id == id);
+    var car = findElement(req.params.id);
 
     if (!car)
         res.status(404).send("not found");
