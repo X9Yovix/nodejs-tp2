@@ -19,8 +19,12 @@ router.post('/add', (req, res) => {
     var newElement = { id: id, name: name };
 
     cars.push(newElement);
-    
-    res.sendFile(path.join(`${__dirname}/../view/cars/add.html`));
+
+    res.redirect('/cars/');
+});
+
+router.get('/', (req, res) => {
+    res.send({ "cars": cars });
 });
 
 module.exports = router;
