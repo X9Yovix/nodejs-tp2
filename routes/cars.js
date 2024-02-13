@@ -27,4 +27,15 @@ router.get('/', (req, res) => {
     res.send({ "cars": cars });
 });
 
+
+router.get('/:id', (req, res) => {
+    var id = req.params.id;
+    var car = cars.find(car => car.id == id);
+
+    if (!car)
+        res.status(404).send("not found");
+
+    res.send(car);
+});
+
 module.exports = router;
